@@ -1,0 +1,8 @@
+# Use a imagem de runtime do .NET Core
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS base
+WORKDIR /app
+COPY app ./
+
+# Expõe a porta e inicia o aplicativo
+EXPOSE 80
+ENTRYPOINT ["dotnet", "MeuSite.dll"]
