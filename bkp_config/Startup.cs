@@ -26,13 +26,7 @@ namespace MEUSITE
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(@"
-                    <html>
-                    <body style='background-color: blue; color: white;'>
-                        <h1>Bem-vindo ao Site Projeto2 - EngeDomus</h1>
-                    </body>
-                    </html>
-                    ");
+                    await context.Response.WriteAsync("Bem-vindo ao Site Projeto 2! - Novo deploy");
                 });
             });
         }
