@@ -4,7 +4,6 @@ phases:
     commands:
       - echo "Autenticacao no repositorio do AWS ECR"
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 962640257662.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=962640257662.dkr.ecr.us-east-1.amazonaws.com/proj2site
 
   build:
     commands:
@@ -12,16 +11,17 @@ phases:
       - dotnet publish -c Release -o out
       - ls -lah out
       - echo "Build da imagem Docker"
-      - docker build -t proj2site .
+      - docker build -t meusite .
       - echo "Marcar imagem com tag do ECR"
-      - docker tag proj2site:latest $REPOSITORY_URI:latest
+      - docker tag meusite:latest 962640257662.dkr.ecr.us-east-1.amazonaws.com/meusite:latest
+      #- docker tag proj2site:latest 962640257662.dkr.ecr.us-east-1.amazonaws.com/proj2site:latest
 
   post_build:
     commands:
       - echo "Enviar (push) imagem para o repositorio AWS ECR."
-      - docker push $REPOSITORY_URI:latest
+      - docker push 962640257662.dkr.ecr.us-east-1.amazonaws.com/meusite:latest
       - echo "Gerando arquivo imagedefinitions.json"
-      - printf '[{"name":"proj2site","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - printf '[{"name":"meusite-container","imageUri":"962640257662.dkr.ecr.us-east-1.amazonaws.com/meusite:latest"}]' > imagedefinitions.json
       - cat imagedefinitions.json 
 
 artifacts:
