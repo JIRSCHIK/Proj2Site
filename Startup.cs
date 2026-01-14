@@ -23,11 +23,11 @@ namespace MEUSITE
             }
 
             // Endpoint para servir a imagem
-            app.Map("/images/poweredbyaws.png", imageApp =>
+            app.Map("/poweredbyaws.png", imageApp =>
             {
                 imageApp.Run(async context =>
                 {
-                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "/images/poweredbyaws.png");
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "/poweredbyaws.png");
 
                     if (!File.Exists(imagePath))
                     {
@@ -77,7 +77,7 @@ namespace MEUSITE
                         <p>
                             <h1><center>Projeto 2 - Meu Site</center></h1>
                             <h2><center>Cloud Treinamentos</center></h2>
-                            <center><img src='/images/poweredbyaws.png' alt='Powered by AWS' class='resized-image'></center>
+                            <center><img src='/poweredbyaws.png' alt='Powered by AWS' class='resized-image'></center>
                         <br>
                     <div class='relogio' id='relogio'>00:00:00</div>
                     <script>
