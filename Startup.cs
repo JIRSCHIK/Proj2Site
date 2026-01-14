@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace MEUSITE
 {
@@ -19,6 +21,27 @@ namespace MEUSITE
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Endpoint para servir a imagem
+            app.Map("/image2.png", imageApp =>
+            {
+                imageApp.Run(async context =>
+                {
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "image2.png");
+
+                    if (!File.Exists(imagePath))
+                    {
+                        context.Response.StatusCode = 404;
+                        await context.Response.WriteAsync("Imagem não encontrada");
+                        return;
+                    }
+
+                    context.Response.ContentType = "image/png";
+                    await context.Response.SendFileAsync(imagePath);
+                });
+            });
+
+            // Página principal (HTML)
 
             app.Run(async context =>
             {
@@ -73,7 +96,6 @@ namespace MEUSITE
                             <h5><center>Hosted by AWS Fargate Service</center></h5>
                             <h5><a href='https://comunidadecloud.com/' target='_blank'>Visit: Cloud Treinamentos</a></h5>
                         </p>
-
                     </body>
                     </html>
                 ");
