@@ -1,27 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\commit\\avaliacao1\\MeuSite\\MeuSite.csproj": {}
+    "C:\\Users\\fegr3648\\OneDriveGPS\\OneDrive - Diretório Padrão\\Documentos\\Diversos\\PosGraduacaoAWS\\Projetos\\Proj2Site\\MeuSite.csproj": {}
   },
   "projects": {
-    "C:\\commit\\avaliacao1\\MeuSite\\MeuSite.csproj": {
+    "C:\\Users\\fegr3648\\OneDriveGPS\\OneDrive - Diretório Padrão\\Documentos\\Diversos\\PosGraduacaoAWS\\Projetos\\Proj2Site\\MeuSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\commit\\avaliacao1\\MeuSite\\MeuSite.csproj",
+        "projectUniqueName": "C:\\Users\\fegr3648\\OneDriveGPS\\OneDrive - Diretório Padrão\\Documentos\\Diversos\\PosGraduacaoAWS\\Projetos\\Proj2Site\\MeuSite.csproj",
         "projectName": "MeuSite",
-        "projectPath": "C:\\commit\\avaliacao1\\MeuSite\\MeuSite.csproj",
-        "packagesPath": "C:\\Users\\win\\.nuget\\packages\\",
-        "outputPath": "C:\\commit\\avaliacao1\\MeuSite\\obj\\",
+        "projectPath": "C:\\Users\\fegr3648\\OneDriveGPS\\OneDrive - Diretório Padrão\\Documentos\\Diversos\\PosGraduacaoAWS\\Projetos\\Proj2Site\\MeuSite.csproj",
+        "packagesPath": "C:\\Users\\fegr3648\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fegr3648\\OneDriveGPS\\OneDrive - Diretório Padrão\\Documentos\\Diversos\\PosGraduacaoAWS\\Projetos\\Proj2Site\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\win\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\fegr3648\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
@@ -79,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417\\RuntimeIdentifierGraph.json"
         }
       }
     }
