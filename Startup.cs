@@ -10,7 +10,7 @@ namespace MEUSITE
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configuração de serviços
+            // Nenhum serviço necessário para app mínima
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -20,14 +20,23 @@ namespace MEUSITE
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
+            app.Run(async context =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Bem-vindo ao Site Projeto 2!");
-                });
+                context.Response.ContentType = "text/html; charset=utf-8";
+
+                await context.Response.WriteAsync(@"
+                    <!DOCTYPE html>
+                    <html lang='pt-BR'>
+                    <head>
+                        <meta charset='utf-8'>
+                        <title>Meu Site</title>
+                    </head>
+                    <body style='background-color: #2c3e50; color: white; font-family: Arial, Helvetica, sans-serif;'>
+                        <h1>Bem-vindo ao Site Projeto 2!</h1>
+                        <p>Novo deploy realizado com sucesso.</p>
+                    </body>
+                    </html>
+                ");
             });
         }
     }
