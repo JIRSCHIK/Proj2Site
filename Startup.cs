@@ -26,7 +26,7 @@ namespace MEUSITE
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Bem-vindo ao Site Projeto 2! - Novo deploy realizado em " + DateTime.Now);
+                    await context.Response.WriteAsync("Bem-vindo ao Site Projeto 2! - Novo deploy");
                 });
             });
         }
