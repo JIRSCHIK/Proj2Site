@@ -77,7 +77,7 @@ namespace MEUSITE
                         <p>
                             <h1><center>Projeto 2 - Meu Site</center></h1>
                             <h2><center>Cloud Treinamentos</center></h2>
-                            <center><img src='/poweredbyaws.png' alt='Powered by AWS' class='resized-image'></center>
+                            <center><img src='images/poweredbyaws.png' alt='Powered by AWS' class='resized-image'></center>
                         <br>
                     <div class='relogio' id='relogio'>00:00:00</div>
                     <script>
