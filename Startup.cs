@@ -28,12 +28,52 @@ namespace MEUSITE
                     <!DOCTYPE html>
                     <html lang='pt-BR'>
                     <head>
-                        <meta charset='utf-8'>
-                        <title>Meu Site</title>
+                    <meta charset='UTF-8'>
+                    <title>Projeto 2 - Meu Site</title>
+                    <style>
+                        body {
+                        background-color:rgb(215,224,229);
+                        font-family:verdana;
+                        align-items: center;
+                        }
+                        .relogio {
+                        font-size: 2em;
+                        background: #777;
+                        padding: 20px 40px;
+                        border-radius: 10px;
+                        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+                        }
+                        .resized-image {
+                        width: 350px;
+                        height: auto;
+                        }
+                    </style>
                     </head>
-                    <body style='background-color: #2c3e50; color: white; font-family: Arial, Helvetica, sans-serif;'>
-                        <h1>Bem-vindo ao Site Projeto 2!</h1>
-                        <p>Novo deploy realizado com sucesso.</p>
+                    <body>
+                        <br>
+                        <p>
+                            <h1><center>Projeto 2 - Meu Site</center></h1>
+                            <h2><center>Cloud Treinamentos</center></h2>
+                            <center><img src='images/poweredbyaws.png' class='resized-image'></center>
+                        <br>
+                    <div class='relogio' id='relogio'>00:00:00</div>
+                    <script>
+                        function atualizarRelogio() {
+                        const agora = new Date();
+                        const horas = String(agora.getHours()).padStart(2, '0');
+                        const minutos = String(agora.getMinutes()).padStart(2, '0');
+                        const segundos = String(agora.getSeconds()).padStart(2, '0');
+                        const relogio = document.getElementById('relogio');
+                        relogio.textContent = `${horas}:${minutos}:${segundos}`;
+                        }
+                        setInterval(atualizarRelogio, 1000);
+                        atualizarRelogio(); // para mostrar o horário imediatamente
+                    </script>
+                        <br>
+                            <h5><center>Hosted by AWS Fargate Service</center></h5>
+                            <h5><a href='https://comunidadecloud.com/' target='_blank'>Visit: Cloud Treinamentos</a></h5>
+                        </p>
+
                     </body>
                     </html>
                 ");
