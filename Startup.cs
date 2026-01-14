@@ -23,11 +23,11 @@ namespace MEUSITE
             }
 
             // Endpoint para servir a imagem
-            app.Map("/image2.png", imageApp =>
+            app.Map("/images/poweredbyaws.png", imageApp =>
             {
                 imageApp.Run(async context =>
                 {
-                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "image2.png");
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "/images/poweredbyaws.png");
 
                     if (!File.Exists(imagePath))
                     {
