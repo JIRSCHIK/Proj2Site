@@ -1,0 +1,36 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo ---------- Logging in to Amazon ECR...
+      - aws --version
+      # Login no repositorio AWS ECR
+      - echo ---------- Autenticacao no repositorio do AWS ECR
+#      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 962640257662.dkr.ecr.us-east-1.amazonaws.com
+      # Autenticacao no DockerHub permite download ilimitado de imagens
+      - echo ---------- Login no Docker Hub usando PAT
+      # Definir as variáveis abaixo em 'Environment Variables' do projeto ou no 'Secret Manager'
+      - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      # Variaveis de ambiente para facilitar a escrita do buildspec.yml
+#      - REPOSITORY_URI=962640257662.dkr.ecr.us-east-1.amazonaws.com/projeto2
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+  build:
+    commands:
+      # Criacao/build da imagem com base no Dockerfile
+      - echo ---------- Build iniciado em `date`
+#      - docker build -t $REPOSITORY_URI:latest .
+      # Docker tag para renomear a imagem, se necessario
+#      # docker tag projeto2:latest 962640257662.dkr.ecr.us-east-1.amazonaws.com/projeto2:ultimo
+  post_build:
+    commands:
+      - echo ---------- Build finalizado em `date`
+      # Envia a imagem criada para o repositorio do AWS ECR
+      - echo ---------- Enviando a imagem para o repositorio AWS ECR.
+#      - docker push $REPOSITORY_URI:latest
+      # Geracao do arquivo imagedefinitions.json para  AWS ECS, CodeBuild e CodePipeline
+      - echo ---------- Gerando arquivo imagedefinitions.json
+#      - printf '[{"name":"projeto2","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+#      - cat imagedefinitions.json 
+artifacts:
+    files: 
+#      - imagedefinitions.json

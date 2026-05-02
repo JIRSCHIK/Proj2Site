@@ -1,0 +1,32 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      dotnet: 8.0
+    commands:
+      - echo "Restaurando dependências..."
+      - dotnet restore
+
+  pre_build:
+    commands:
+      - echo "Publicando app ASP.NET Projeto2"
+      - dotnet publish -c Release - app
+      - echo "Autenticacao no repositorio do AWS ECR"
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ...962640257662.dkr.ecr.us-east-1.amazonaws.com
+
+  build:
+    commands:
+      - echo "Construindo imagem Docker"
+      - docker build -t meuapp .
+      - docker tag meuapp:latest 962640257662.dkr.ecr.us-east-1.amazonaws.com/meuapp:latest
+
+  post_build:
+    commands:
+      - echo "Push de imagem para o repositorio AWS ECR.""
+      - docker push $REPOSITORY_URI:latest
+      - echo "Gerando arquivo imagedefinitions.json"
+      - printf '[{"name":"projeto2","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json 
+artifacts:
+    files: 
+      - imagedefinitions.json
