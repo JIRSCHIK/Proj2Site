@@ -10,7 +10,8 @@ phases:
     commands:
       - echo '---------- Build da aplicação ----------'
       - dotnet publish -c Release -o out
-      - ls -lah out
+      - echo '---------- Conteúdo da aplicação ----------'
+      - du -ah --exclude='.git' "$PWD/out"
       - echo '---------- Build da imagem Docker ----------'
       - docker build -t proj2site .
       - echo '---------- Marcar imagem com tag do ECR ----------'
@@ -18,7 +19,7 @@ phases:
 
   post_build:
     commands:
-      - echo '---------- Enviar (push) imagem para o repositorio AWS ECR ----------'
+      - echo '---------- Enviar imagem para o repositorio AWS ECR ----------'
       - docker push $REPOSITORY_URI:latest
       - echo '---------- Gerando arquivo imagedefinitions.json ----------'
       - printf '[{"name":"proj2site","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
