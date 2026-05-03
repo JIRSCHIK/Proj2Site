@@ -64,15 +64,338 @@ namespace MEUSITE
                     <html lang='pt-BR'>
                     <head>
                         <meta charset='utf-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1'>
                         <meta name='ecs-task-name'    content='{ecsTaskName}'>
                         <meta name='ecs-service-name' content='{ecsServiceName}'>
-                        <title>Meu Site</title>
+                        <title>Site Projeto 2</title>
+                        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+                        <style>
+                            :root {
+                                --brand: #d54b01;
+                                --brand-dark: #a83800;
+                                --brand-light: #ff6a2b;
+                                --bg: #0d0d0d;
+                                --surface: #161616;
+                                --border: rgba(213, 75, 1, 0.25);
+                                --text: #f5f0eb;
+                                --muted: #7a6f68;
+                            }
+
+                            *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+                            body {
+                                background-color: var(--bg);
+                                color: var(--text);
+                                font-family: 'DM Mono', monospace;
+                                min-height: 100vh;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: hidden;
+                                position: relative;
+                            }
+
+                            /* Honeycomb canvas layer */
+                            #honeycomb-bg {
+                                position: fixed;
+                                inset: 0;
+                                width: 100%; height: 100%;
+                                pointer-events: none;
+                                z-index: 0;
+                            }
+
+                            /* Background glow — on top of honeycomb */
+                            body::before {
+                                content: '';
+                                position: fixed;
+                                top: -20%;
+                                left: -10%;
+                                width: 60vw;
+                                height: 60vw;
+                                background: radial-gradient(circle, rgba(213,75,1,0.18) 0%, transparent 70%);
+                                pointer-events: none;
+                                z-index: 0;
+                                animation: driftA 14s ease-in-out infinite alternate;
+                            }
+                            body::after {
+                                content: '';
+                                position: fixed;
+                                bottom: -20%;
+                                right: -10%;
+                                width: 50vw;
+                                height: 50vw;
+                                background: radial-gradient(circle, rgba(213,75,1,0.10) 0%, transparent 70%);
+                                pointer-events: none;
+                                z-index: 0;
+                                animation: driftB 18s ease-in-out infinite alternate;
+                            }
+
+                            @keyframes driftA { from { transform: translate(0,0) scale(1); } to { transform: translate(4vw, 5vh) scale(1.08); } }
+                            @keyframes driftB { from { transform: translate(0,0) scale(1); } to { transform: translate(-5vw, -4vh) scale(1.1); } }
+
+                            /* Card */
+                            .card {
+                                position: relative;
+                                z-index: 1;
+                                width: min(560px, 92vw);
+                                background: var(--surface);
+                                border: 1px solid var(--border);
+                                border-radius: 4px;
+                                padding: 3rem 3rem 2.5rem;
+                                box-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 32px 80px rgba(0,0,0,0.6);
+                                animation: slideUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+                            }
+                            @keyframes slideUp {
+                                from { opacity: 0; transform: translateY(32px); }
+                                to   { opacity: 1; transform: translateY(0); }
+                            }
+
+                            /* Top bar accent */
+                            .card::before {
+                                content: '';
+                                position: absolute;
+                                top: 0; left: 0; right: 0;
+                                height: 3px;
+                                background: linear-gradient(90deg, var(--brand-dark), var(--brand-light), var(--brand-dark));
+                                border-radius: 4px 4px 0 0;
+                            }
+
+                            /* Status pill */
+                            .status-pill {
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 8px;
+                                background: rgba(213,75,1,0.12);
+                                border: 1px solid rgba(213,75,1,0.35);
+                                border-radius: 100px;
+                                padding: 5px 14px 5px 10px;
+                                font-size: 0.7rem;
+                                letter-spacing: 0.12em;
+                                text-transform: uppercase;
+                                color: var(--brand-light);
+                                margin-bottom: 1.5rem;
+                                animation: slideUp 0.7s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+                            }
+                            .status-dot {
+                                width: 7px; height: 7px;
+                                background: #4ade80;
+                                border-radius: 50%;
+                                box-shadow: 0 0 8px #4ade80;
+                                animation: pulse 2s ease-in-out infinite;
+                            }
+                            @keyframes pulse {
+                                0%,100% { opacity: 1; transform: scale(1); }
+                                50%      { opacity: 0.6; transform: scale(0.85); }
+                            }
+
+                            h1 {
+                                font-family: 'Syne', sans-serif;
+                                font-size: clamp(1.75rem, 5vw, 2.4rem);
+                                font-weight: 800;
+                                line-height: 1.1;
+                                letter-spacing: -0.02em;
+                                color: var(--text);
+                                margin-bottom: 0.6rem;
+                                animation: slideUp 0.7s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+                            }
+                            h1 span { color: var(--brand-light); }
+
+                            .subtitle {
+                                font-size: 0.85rem;
+                                color: var(--muted);
+                                margin-bottom: 2.5rem;
+                                animation: slideUp 0.7s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+                            }
+
+                            /* Divider */
+                            .divider {
+                                height: 1px;
+                                background: linear-gradient(90deg, var(--border), transparent);
+                                margin-bottom: 2rem;
+                                animation: slideUp 0.7s 0.25s cubic-bezier(0.22,1,0.36,1) both;
+                            }
+
+                            /* Meta grid */
+                            .meta-grid {
+                                display: grid;
+                                grid-template-columns: 1fr 1fr;
+                                gap: 1px;
+                                background: var(--border);
+                                border: 1px solid var(--border);
+                                border-radius: 4px;
+                                overflow: hidden;
+                                animation: slideUp 0.7s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+                            }
+                            .meta-item {
+                                background: var(--surface);
+                                padding: 1.1rem 1.25rem;
+                                transition: background 0.2s;
+                            }
+                            .meta-item:hover { background: #1e1e1e; }
+                            .meta-label {
+                                font-size: 0.65rem;
+                                letter-spacing: 0.14em;
+                                text-transform: uppercase;
+                                color: var(--muted);
+                                margin-bottom: 0.4rem;
+                            }
+                            .meta-value {
+                                font-size: 0.8rem;
+                                color: var(--text);
+                                word-break: break-all;
+                            }
+
+                            /* Footer timestamp */
+                            .footer {
+                                margin-top: 2rem;
+                                font-size: 0.68rem;
+                                color: var(--muted);
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                animation: slideUp 0.7s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+                            }
+                            .footer-badge {
+                                display: flex;
+                                align-items: center;
+                                gap: 6px;
+                            }
+                            .footer-badge svg { opacity: 0.5; }
+                        </style>
                     </head>
-                    <body style='background-color: #2c3e50; color: white; font-family: Arial, Helvetica, sans-serif;'>
-                        <h1>Bem-vindo ao Site Projeto 2!</h1>
-                        <p>Novo deploy realizado com sucesso.</p>
-                        <p><strong>Task:</strong> {ecsTaskName}</p>
-                        <p><strong>Serviço:</strong> {ecsServiceName}</p>
+                    <body>
+                        <canvas id="honeycomb-bg"></canvas>
+                        <div class="card">
+                            <div class="status-pill">
+                                <span class="status-dot"></span>
+                                Deploy concluído
+                            </div>
+
+                            <h1>Bem-vindo ao<br><span>Site Projeto 2</span></h1>
+                            <p class="subtitle">Novo deploy realizado com sucesso.</p>
+
+                            <div class="divider"></div>
+
+                            <div class="meta-grid">
+                                <div class="meta-item">
+                                    <div class="meta-label">Task</div>
+                                    <div class="meta-value">{ecsTaskName}</div>
+                                </div>
+                                <div class="meta-item">
+                                    <div class="meta-label">Serviço</div>
+                                    <div class="meta-value">{ecsServiceName}</div>
+                                </div>
+                            </div>
+
+                            <div class="footer">
+                                <span id="ts"></span>
+                                <span class="footer-badge">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    ECS
+                                </span>
+                            </div>
+                        </div>
+
+                        <script>
+                            // Timestamp
+                            const el = document.getElementById('ts');
+                            el.textContent = new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+
+                            // Honeycomb background
+                            (function () {
+                                const canvas = document.getElementById('honeycomb-bg');
+                                const ctx = canvas.getContext('2d');
+
+                                const HEX_SIZE = 28;       // circumradius
+                                const STROKE   = 'rgba(213, 75, 1, 0.13)';
+                                const FILL_LIT = 'rgba(213, 75, 1, 0.07)';
+
+                                function hexPath(cx, cy, r) {
+                                    ctx.beginPath();
+                                    for (let i = 0; i < 6; i++) {
+                                        const angle = Math.PI / 180 * (60 * i - 30);
+                                        const x = cx + r * Math.cos(angle);
+                                        const y = cy + r * Math.sin(angle);
+                                        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                                    }
+                                    ctx.closePath();
+                                }
+
+                                // Lit hexagons — random subset that slowly fades in/out
+                                let litSet = new Set();
+
+                                function buildGrid() {
+                                    const w = canvas.width, h = canvas.height;
+                                    const cols = Math.ceil(w / (HEX_SIZE * 1.75)) + 2;
+                                    const rows = Math.ceil(h / (HEX_SIZE * 1.52)) + 2;
+                                    const cells = [];
+                                    for (let r = 0; r < rows; r++) {
+                                        for (let c = 0; c < cols; c++) {
+                                            const cx = c * HEX_SIZE * 1.75 - HEX_SIZE;
+                                            const cy = r * HEX_SIZE * 1.52 + (c % 2 === 0 ? 0 : HEX_SIZE * 0.76) - HEX_SIZE;
+                                            cells.push({ cx, cy, id: `${r}-${c}` });
+                                        }
+                                    }
+                                    return cells;
+                                }
+
+                                let cells = [];
+                                // Each lit hex has an alpha that breathes
+                                let litAlpha = {};
+
+                                function resize() {
+                                    canvas.width  = window.innerWidth;
+                                    canvas.height = window.innerHeight;
+                                    cells = buildGrid();
+                                    // seed ~4% random lit cells
+                                    litSet.clear();
+                                    litAlpha = {};
+                                    cells.forEach(c => {
+                                        if (Math.random() < 0.04) {
+                                            litSet.add(c.id);
+                                            litAlpha[c.id] = Math.random();
+                                        }
+                                    });
+                                }
+
+                                let frame = 0;
+                                function draw() {
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                    frame++;
+
+                                    // Occasionally toggle a random hex
+                                    if (frame % 90 === 0 && cells.length) {
+                                        const pick = cells[Math.floor(Math.random() * cells.length)];
+                                        if (litSet.has(pick.id)) {
+                                            litSet.delete(pick.id);
+                                        } else {
+                                            litSet.add(pick.id);
+                                            litAlpha[pick.id] = 0;
+                                        }
+                                    }
+
+                                    cells.forEach(({ cx, cy, id }) => {
+                                        hexPath(cx, cy, HEX_SIZE - 1);
+
+                                        if (litSet.has(id)) {
+                                            litAlpha[id] = Math.min(1, (litAlpha[id] || 0) + 0.01);
+                                            ctx.fillStyle = `rgba(213,75,1,${0.07 * litAlpha[id]})`;
+                                            ctx.fill();
+                                        }
+
+                                        ctx.strokeStyle = STROKE;
+                                        ctx.lineWidth = 0.8;
+                                        ctx.stroke();
+                                    });
+
+                                    requestAnimationFrame(draw);
+                                }
+
+                                window.addEventListener('resize', resize);
+                                resize();
+                                draw();
+                            })();
+                        </script>
                     </body>
                     </html>
                 ");
