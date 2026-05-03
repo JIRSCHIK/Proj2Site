@@ -2,25 +2,25 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Autenticacao no repositorio do AWS ECR"
+      - echo '---------- Autenticacao no repositorio do AWS ECR ----------'
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 962640257662.dkr.ecr.us-east-1.amazonaws.com
       - REPOSITORY_URI=962640257662.dkr.ecr.us-east-1.amazonaws.com/proj2site
 
   build:
     commands:
-      - echo "Build da aplicação"
+      - echo '---------- Build da aplicação ----------'
       - dotnet publish -c Release -o out
       - ls -lah out
-      - echo "Build da imagem Docker"
+      - echo '---------- Build da imagem Docker ----------'
       - docker build -t proj2site .
-      - echo "Marcar imagem com tag do ECR"
+      - echo '---------- Marcar imagem com tag do ECR ----------'
       - docker tag proj2site:latest $REPOSITORY_URI:latest
 
   post_build:
     commands:
-      - echo "Enviar (push) imagem para o repositorio AWS ECR"
+      - echo '---------- Enviar (push) imagem para o repositorio AWS ECR ----------'
       - docker push $REPOSITORY_URI:latest
-      - echo "Gerando arquivo imagedefinitions.json"
+      - echo '---------- Gerando arquivo imagedefinitions.json ----------'
       - printf '[{"name":"proj2site","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
       - cat imagedefinitions.json 
 
