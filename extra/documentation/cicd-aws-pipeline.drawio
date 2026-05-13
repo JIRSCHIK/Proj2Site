@@ -1,0 +1,138 @@
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- GRUPO: DESENVOLVIMENTO -->
+    <mxCell id="grp-dev" value="Desenvolvimento" style="swimlane;startSize=25;fillColor=none;strokeColor=#aaaaaa;strokeDasharray=5 4;fontStyle=0;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="680" height="110" as="geometry" />
+    </mxCell>
+
+    <!-- VSCode -->
+    <mxCell id="vscode" value="&lt;b&gt;VSCode&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Código da aplicação&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="grp-dev">
+      <mxGeometry x="30" y="35" width="160" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- GitHub -->
+    <mxCell id="github" value="&lt;b&gt;GitHub&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Repositório de código&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" vertex="1" parent="grp-dev">
+      <mxGeometry x="310" y="35" width="160" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- Seta VSCode -> GitHub -->
+    <mxCell id="e-vscode-github" value="push" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="vscode" target="github" parent="grp-dev">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- GRUPO: CI/CD PIPELINE -->
+    <mxCell id="grp-cicd" value="CI/CD Pipeline" style="swimlane;startSize=25;fillColor=none;strokeColor=#aaaaaa;strokeDasharray=5 4;fontStyle=0;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="40" y="185" width="680" height="200" as="geometry" />
+    </mxCell>
+
+    <!-- CodePipeline -->
+    <mxCell id="codepipeline" value="&lt;b&gt;AWS CodePipeline&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Orquestra o pipeline&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" vertex="1" parent="grp-cicd">
+      <mxGeometry x="230" y="40" width="200" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- CodeBuild -->
+    <mxCell id="codebuild" value="&lt;b&gt;AWS CodeBuild&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Gera imagem Docker&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="grp-cicd">
+      <mxGeometry x="30" y="125" width="170" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ECR -->
+    <mxCell id="ecr" value="&lt;b&gt;AWS ECR&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Registro de imagens&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="grp-cicd">
+      <mxGeometry x="245" y="125" width="170" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- CodeDeploy -->
+    <mxCell id="codedeploy" value="&lt;b&gt;AWS CodeDeploy&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Inicia atualização&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="grp-cicd">
+      <mxGeometry x="470" y="125" width="170" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- Seta CodePipeline -> CodeBuild -->
+    <mxCell id="e-cp-cb" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="codepipeline" target="codebuild" parent="grp-cicd">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Seta CodeBuild -> ECR -->
+    <mxCell id="e-cb-ecr" value="push imagem" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="codebuild" target="ecr" parent="grp-cicd">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Seta CodePipeline -> CodeDeploy -->
+    <mxCell id="e-cp-cd" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="codepipeline" target="codedeploy" parent="grp-cicd">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Seta GitHub -> CodePipeline (entre grupos) -->
+    <mxCell id="e-github-cp" value="trigger" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="github" target="codepipeline" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- GRUPO: ECS FARGATE -->
+    <mxCell id="grp-ecs" value="AWS ECS com Fargate" style="swimlane;startSize=25;fillColor=none;strokeColor=#aaaaaa;strokeDasharray=5 4;fontStyle=0;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="40" y="420" width="680" height="280" as="geometry" />
+    </mxCell>
+
+    <!-- ECS Cluster -->
+    <mxCell id="grp-cluster" value="ECS Cluster" style="swimlane;startSize=20;fillColor=none;strokeColor=#aaaaaa;strokeDasharray=3 3;fontStyle=0;fontSize=10;" vertex="1" parent="grp-ecs">
+      <mxGeometry x="20" y="35" width="640" height="225" as="geometry" />
+    </mxCell>
+
+    <!-- ECS Service -->
+    <mxCell id="grp-service" value="Serviço (até 3 tarefas)" style="swimlane;startSize=20;fillColor=none;strokeColor=#aaaaaa;strokeDasharray=3 3;fontStyle=0;fontSize=10;" vertex="1" parent="grp-cluster">
+      <mxGeometry x="20" y="30" width="600" height="180" as="geometry" />
+    </mxCell>
+
+    <!-- Tarefa 1 -->
+    <mxCell id="task1" value="&lt;b&gt;Tarefa 1&lt;/b&gt;&lt;br/&gt;Fargate&lt;br/&gt;&lt;br/&gt;Container App" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="grp-service">
+      <mxGeometry x="20" y="30" width="160" height="120" as="geometry" />
+    </mxCell>
+
+    <!-- Tarefa 2 -->
+    <mxCell id="task2" value="&lt;b&gt;Tarefa 2&lt;/b&gt;&lt;br/&gt;Fargate&lt;br/&gt;&lt;br/&gt;Container App" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="grp-service">
+      <mxGeometry x="220" y="30" width="160" height="120" as="geometry" />
+    </mxCell>
+
+    <!-- Tarefa 3 -->
+    <mxCell id="task3" value="&lt;b&gt;Tarefa 3&lt;/b&gt;&lt;br/&gt;Fargate&lt;br/&gt;&lt;br/&gt;Container App" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="grp-service">
+      <mxGeometry x="420" y="30" width="160" height="120" as="geometry" />
+    </mxCell>
+
+    <!-- Seta CodeDeploy -> ECS (entre grupos) -->
+    <mxCell id="e-cd-ecs" value="atualiza" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="codedeploy" target="grp-ecs" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Seta ECR -> ECS (pull imagem) -->
+    <mxCell id="e-ecr-ecs" value="pull imagem" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="ecr" target="grp-ecs" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Load Balancer -->
+    <mxCell id="alb" value="&lt;b&gt;AWS Load Balancer&lt;/b&gt;&lt;br/&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Target Group: IP addresses&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="255" y="740" width="250" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- Setas Load Balancer -> Tarefas -->
+    <mxCell id="e-alb-t1" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="alb" target="task1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e-alb-t2" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="alb" target="task2" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e-alb-t3" value="" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="alb" target="task3" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- Usuários -->
+    <mxCell id="users" value="&lt;b&gt;Usuários / Internet&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="295" y="840" width="170" height="45" as="geometry" />
+    </mxCell>
+
+    <!-- Seta Usuários -> Load Balancer -->
+    <mxCell id="e-users-alb" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;fontSize=10;" edge="1" source="users" target="alb" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
