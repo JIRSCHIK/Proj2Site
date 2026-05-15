@@ -10,6 +10,8 @@ phases:
     commands:
       - echo '---------- Conteúdo da aplicação ----------'
       - ls -lah
+      - mkdir /out
+      - ls -lah
       - echo '---------- Build da aplicação ----------'
       - dotnet publish -c Release -o /out # Gerar a pasta na raiz do projeto
       - echo '---------- Conteúdo da aplicação ----------'
