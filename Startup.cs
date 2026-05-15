@@ -70,7 +70,7 @@ namespace MEUSITE
                         <title>Site Projeto 2</title>
                     </head>
                     <body style='background-color: #d54b01; color: white; font-family: Arial, Helvetica, sans-serif;'>
-                        <h1>Bem-vindo ao Site Projeto 2!</h1>
+                        <h1>Bem-vindo ao Site Projeto 2! Alteração feita na apresentação</h1>
                         <p>Novo deploy realizado com <strong>sucesso</strong>.</p>
                         <p><strong>Task:</strong> {ecsTaskName}</p>
                         <p><strong>Serviço:</strong> {ecsServiceName}</p>
