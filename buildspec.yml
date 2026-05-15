@@ -9,7 +9,7 @@ phases:
   build:
     commands:
       - echo '---------- Build da aplicação ----------'
-      - dotnet publish -c Release -o out
+      - dotnet publish -c Release -o /out
       - echo '---------- Conteúdo da aplicação ----------'
       - du -ah --exclude='.git' "$PWD/out"
       - echo '---------- Build da imagem Docker ----------'
