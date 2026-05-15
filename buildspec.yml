@@ -8,10 +8,12 @@ phases:
 
   build:
     commands:
+      - echo '---------- Conteúdo da aplicação ----------'
+      - ls -lah
       - echo '---------- Build da aplicação ----------'
       - dotnet publish -c Release -o /out
       - echo '---------- Conteúdo da aplicação ----------'
-      - du -ah --exclude='.git' "$PWD/out"
+      - ls -lah
       - echo '---------- Build da imagem Docker ----------'
       - docker build -t proj2site .
       - echo '---------- Marcar imagem com tag do ECR ----------'
