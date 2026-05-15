@@ -15,7 +15,7 @@ phases:
       - echo '---------- Build da aplicação ----------'
       - dotnet publish -c Release -o /out # Gerar a pasta na raiz do projeto
       - echo '---------- Conteúdo da aplicação ----------'
-      - ls -lah ./out
+      - ls -lah /out
       - echo '---------- Build da imagem Docker ----------'
       - docker build -t proj2site .
       - echo '---------- Marcar imagem com tag do ECR ----------'
