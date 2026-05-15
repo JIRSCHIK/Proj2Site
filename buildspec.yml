@@ -1,5 +1,9 @@
 version: 0.2
 phases:
+  install:
+    runtime-versions:
+      dotnet: 3.1 # SDK .NET 3.1 instalado
+
   pre_build:
     commands:
       - echo '---------- Autenticacao no repositorio do AWS ECR ----------'
@@ -11,9 +15,9 @@ phases:
       - echo '---------- Conteúdo da aplicação ----------'
       - ls -lah
       - echo '---------- Build da aplicação ----------'
-      - dotnet publish -c Release -o /out
+      - dotnet publish -c Release -o /out # Gerar a pasta na raiz do projeto
       - echo '---------- Conteúdo da aplicação ----------'
-      - ls -lah
+      - ls -lah ./out
       - echo '---------- Build da imagem Docker ----------'
       - docker build -t proj2site .
       - echo '---------- Marcar imagem com tag do ECR ----------'
