@@ -138,8 +138,8 @@ namespace MEUSITE
         }
 
         .clock {
-            font-family: 'Share Tech Mono', monospace;
-            /* font-family: 'Saira Stencil One', sans-serif; */
+            /* font-family: 'Share Tech Mono', monospace; */
+            font-family: 'Saira Stencil One', sans-serif;
             font-size: 5.5rem;
             line-height: 1;
             letter-spacing: .06em;
