@@ -69,7 +69,7 @@ namespace MEUSITE
                         <meta name='ecs-service-name' content='{ecsServiceName}'>
                         <title>Proj2Site</title>
                     </head>
-                    <body style='background-color: #d54b01; color: white; font-family: Arial, Helvetica, sans-serif;'>
+                    <body style='background-color: #0128d5; color: white; font-family: Arial, Helvetica, sans-serif;'>
                         <h1>Bem-vindo ao Site Projeto 2 - Adans</h1>
                         <p>Novo deploy realizado com <strong>sucesso</strong>.</p>
                         <p><strong>Task:</strong> {ecsTaskName}</p>
